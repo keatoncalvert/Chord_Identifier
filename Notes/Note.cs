@@ -3,8 +3,8 @@ namespace Chord_Identifier.Notes
 {
     class Note(int value = 0, int offset = 0)
     {
-        private readonly String[] NoteNames = { "C", "C#\\Db", "D", "D#\\Eb", "E", "F", "F#\\Gb", "G", "G#\\Ab", "A", "A#\\Bb", "B" };
-        public int Value { get; set; } = value + offset;
+        private readonly string[] NoteNames = { "C", "C#\\Db", "D", "D#\\Eb", "E", "F", "F#\\Gb", "G", "G#\\Ab", "A", "A#\\Bb", "B" };
+        public int Value = value + offset;
         static public List<Note> IntArrayToNotes(int root, int[] notes)
         {
             List<Note> result = new List<Note>();
@@ -15,9 +15,21 @@ namespace Chord_Identifier.Notes
             return result;
         }
 
+        static public int NoteIndexFromValue(int value)
+        {
+            int string_val = value;
+            while (string_val < 0)
+            {
+                string_val += 12;
+            }
+            string_val %= 12;
+            return string_val;
+        }
+
         public override string ToString()
         {
-            return NoteNames[Value % 12];
+            int note_index = NoteIndexFromValue(Value);
+            return NoteNames[note_index];
         }
     }
 }
