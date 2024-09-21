@@ -13,7 +13,7 @@ namespace Chord_Identifier
     {
         static void Main(string[] args)
         {
-            Chord tchord = new(2, 3, 4, 5, 6);
+            Chord tchord = new(7, 4, 7);
             Console.WriteLine(tchord);
         }
     }

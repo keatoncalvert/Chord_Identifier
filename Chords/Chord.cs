@@ -4,18 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Chord_Identifier.Notes;
+
 namespace Chord_Identifier.Chords
 {
     struct Chord
     {
-        public int Root { get; }
-        public List<int> Notes;
+        public Note Root { get; }
+        public List<Note> Notes;
         public ChordValue Value;
 
         public Chord(int root, params int[] notes)
         {
-            Root = root;
-            Notes = new(notes);
+            Root = new(root);
+            Notes = Note.IntArrayToNotes(root, notes);
             Value = new(this);
         }
 
@@ -28,7 +30,7 @@ namespace Chord_Identifier.Chords
     class ChordValue(Chord chord)
     {
         private Chord Value { get; } = chord;
-        public int Root { get { return Value.Root; } }
-        public List<int> Notes { get { return Value.Notes; } }
+        public Note Root { get { return Value.Root; } }
+        public List<Note> Notes { get { return Value.Notes; } }
     }
 }
