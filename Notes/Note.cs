@@ -3,7 +3,7 @@ namespace Chord_Identifier.Notes
 {
     class Note(int value = 0, int offset = 0)
     {
-        private readonly String[] NoteNames = { "C", "C#\\Db", "D", "D#\\Eb", "E", "F", "FC#\\Gb", "G", "G#\\Ab", "A", "A#\\Bb", "B" };
+        private readonly String[] NoteNames = { "C", "C#\\Db", "D", "D#\\Eb", "E", "F", "F#\\Gb", "G", "G#\\Ab", "A", "A#\\Bb", "B" };
         public int Value { get; set; } = value + offset;
         static public List<Note> IntArrayToNotes(int root, int[] notes)
         {
