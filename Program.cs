@@ -1,10 +1,20 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Notes
+using Chord_Identifier.Chords;
+using Chord_Identifier.Notes;
+
+namespace Chord_Identifier
 {
-    class Note
+    class Program
     {
-        public int note { get; set; } = 0;
+        static void Main(string[] args)
+        {
+            Chord tchord = new(2, 3, 4, 5, 6);
+            Console.WriteLine(tchord);
+        }
     }
 }
