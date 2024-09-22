@@ -32,4 +32,17 @@ namespace Chord_Identifier.Notes
             return NoteNames[note_index];
         }
     }
+
+    public enum Third
+    {
+        Major = 4,
+        Minor = 3,
+    }
+
+    public enum Fifth
+    {
+        Perfect = 7,
+        Diminished = 6,
+        Augmented = 8,
+    }
 }
