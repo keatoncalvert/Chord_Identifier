@@ -68,16 +68,15 @@ namespace Chord_Identifier.Chords
 
     class ChordBuilder(int root) : ChordValue(root)
     {
-        public ChordBuilder AddThird(Third third)
-        {
-            AddNote((int)third);
-            return this;
-        }
-        public ChordBuilder AddFifth(Fifth fifth)
-        {
-            AddNote((int)fifth);
-            return this;
-        }
+        public ChordBuilder AddMajorThird() { AddNote(4); return this; }
+        public ChordBuilder AddMinorThird() { AddNote(3); return this; }
+        public ChordBuilder AddAugThird() { AddNote(5); return this; }
+        public ChordBuilder AddDimThird() { AddNote(2); return this; }
+        public ChordBuilder AddSus4() { AddNote(5); return this; }
+        public ChordBuilder AddSus2() { AddNote(2); return this; }
+        public ChordBuilder AddPerfectFifth() { AddNote(7); return this; }
+        public ChordBuilder AddTritone() { AddNote(6); return this; }
+        public ChordBuilder AddAugmentedFifth() { AddNote(8); return this; }
         public Chord Build()
         {
             Chord chord = new(Root, Notes);
@@ -85,7 +84,19 @@ namespace Chord_Identifier.Chords
         }
     }
 
-    class ChordFactory
+    abstract class ChordFactory(int root)
     {
+        protected ChordBuilder Cb { get; set; } = new(root);
+        public abstract Chord MakeChord();
+    }
+
+    class MajorTritone(int root) : ChordFactory(root)
+    {
+        public override Chord MakeChord()
+        {
+            Cb.AddMajorThird();
+            Cb.AddPerfectFifth();
+            return Cb.Build();
+        }
     }
 }

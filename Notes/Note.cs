@@ -26,23 +26,15 @@ namespace Chord_Identifier.Notes
             return string_val;
         }
 
+        public int CompareTo(Note other)
+        {
+            return Value.CompareTo(other.Value);
+        }
+
         public override string ToString()
         {
             int note_index = NoteIndexFromValue(Value);
             return NoteNames[note_index];
         }
-    }
-
-    public enum Third
-    {
-        Major = 4,
-        Minor = 3,
-    }
-
-    public enum Fifth
-    {
-        Perfect = 7,
-        Diminished = 6,
-        Augmented = 8,
     }
 }

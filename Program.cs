@@ -13,14 +13,18 @@ namespace Chord_Identifier
     {
         static void Main(string[] args)
         {
-            Chord tchord = new(-1, 4, 5, 7, 11);
+            Chord tchord = new(0, 4, 5, 7, 11);
             Console.WriteLine(tchord);
 
             ChordBuilder cb = new(-12);
-            cb.AddThird(Third.Minor);
-            cb.AddFifth(Fifth.Perfect);
+            cb.AddMajorThird();
+            cb.AddPerfectFifth();
             Chord bchord = new(cb.Build());
             Console.WriteLine(bchord);
+
+            MajorTritone mt = new(0);
+            Chord fchord = mt.MakeChord();
+            Console.WriteLine(fchord);
         }
     }
 }
