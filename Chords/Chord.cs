@@ -8,18 +8,10 @@ using Chord_Identifier.Notes;
 
 namespace Chord_Identifier.Chords
 {
-    struct Chord
+    internal class ChordValue(int root, params int[] notes)
     {
-        public Note Root { get; }
-        public List<Note> Notes;
-        public ChordValue Value;
-
-        public Chord(int root, params int[] notes)
-        {
-            Root = new(root);
-            Notes = Note.IntArrayToNotes(root, notes);
-            Value = new(this);
-        }
+        public Note Root { get; } = new(root);
+        public List<Note> Notes = Note.IntArrayToNotes(root, notes);
 
         public override string ToString()
         {
@@ -27,10 +19,20 @@ namespace Chord_Identifier.Chords
         }
     }
 
-    class ChordValue(Chord chord)
+    internal class ChordStringInterpreter
     {
-        private Chord Value { get; } = chord;
-        public Note Root { get { return Value.Root; } }
-        public List<Note> Notes { get { return Value.Notes; } }
+        private readonly ChordValue Chord;
+        public ChordStringInterpreter(ChordValue chord) { Chord = chord; }
     }
+
+    class Chord : ChordValue
+    {
+        private ChordStringInterpreter CSI;
+
+        public Chord(int root, params int[] notes) : base(root, notes)
+        {
+            CSI = new(this);
+        }
+    }
+
 }
