@@ -22,8 +22,14 @@ namespace Chord_Identifier
             Chord bchord = new(cb.Build());
             Console.WriteLine(bchord);
 
-            MajorTritone mt = new(0);
+            MajorTriad mt = new(0);
             Console.WriteLine(mt.Chord);
+
+            MinorTriad mnt = new(0);
+            Console.WriteLine(mnt.Chord);
+
+            AugmentedTriad at = new(0);
+            Console.WriteLine(at.Chord);
         }
     }
 }

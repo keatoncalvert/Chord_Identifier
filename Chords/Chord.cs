@@ -78,7 +78,7 @@ namespace Chord_Identifier.Chords
 
     abstract class ChordFactory(int root)
     {
-        public Chord Chord { get { return MakeChord(); } }
+        public Chord Chord { get { return new(MakeChord()); } }
 
         protected ChordBuilder Cb { get; set; } = new(root);
 
@@ -101,6 +101,16 @@ namespace Chord_Identifier.Chords
         {
             Cb.AddMinorThird();
             Cb.AddPerfectFifth();
+            return Cb.Build();
+        }
+    }
+
+    class AugmentedTriad(int root) : ChordFactory(root)
+    {
+        public override Chord MakeChord()
+        {
+            Cb.AddMajorThird();
+            Cb.AddAugmentedFifth();
             return Cb.Build();
         }
     }
