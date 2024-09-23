@@ -23,8 +23,7 @@ namespace Chord_Identifier
             Console.WriteLine(bchord);
 
             MajorTritone mt = new(0);
-            Chord fchord = mt.MakeChord();
-            Console.WriteLine(fchord);
+            Console.WriteLine(mt.Chord);
         }
     }
 }

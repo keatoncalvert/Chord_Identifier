@@ -27,10 +27,7 @@ namespace Chord_Identifier.Chords
         public bool AddNote(Note note)
         {
             bool available = !Notes.Contains(note);
-            if (available)
-            {
-                Notes.Add(note);
-            }
+            if (available) { Notes.Add(note); }
             return available;
         }
         public bool AddNote(int noteValue)
@@ -54,15 +51,10 @@ namespace Chord_Identifier.Chords
     {
         private ChordStringInterpreter CSI;
 
-        public Chord(int root, params int[] notes) : base(root, notes)
-        {
-            CSI = new(this);
-        }
+        public Chord(int root, params int[] notes) : base(root, notes) { CSI = new(this); }
 
-        public Chord(Note root, List<Note> notes) : this(root.Value)
-        {
-            Notes = notes;
-        }
+        public Chord(Note root, List<Note> notes) : this(root.Value) {  Notes = notes; }
+
         public Chord(Chord chord) : this(chord.Root, chord.Notes) { }
     }
 
@@ -86,15 +78,28 @@ namespace Chord_Identifier.Chords
 
     abstract class ChordFactory(int root)
     {
+        public Chord Chord { get { return MakeChord(); } }
+
         protected ChordBuilder Cb { get; set; } = new(root);
+
         public abstract Chord MakeChord();
     }
 
-    class MajorTritone(int root) : ChordFactory(root)
+    class MajorTriad(int root) : ChordFactory(root)
     {
         public override Chord MakeChord()
         {
             Cb.AddMajorThird();
+            Cb.AddPerfectFifth();
+            return Cb.Build();
+        }
+    }
+
+    class MinorTriad(int root) : ChordFactory(root)
+    {
+        public override Chord MakeChord()
+        {
+            Cb.AddMinorThird();
             Cb.AddPerfectFifth();
             return Cb.Build();
         }
